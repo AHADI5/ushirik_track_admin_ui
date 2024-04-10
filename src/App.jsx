@@ -3,7 +3,9 @@
 // import './index.css';
 // export default function App() {
 
+import ExtraInformations from "./components/login_components/ExtraInformations";
 import Header from "./components/login_components/Header";
+import LoginSection from "./components/login_components/LoginSection";
 
  
 
@@ -141,10 +143,18 @@ import Header from "./components/login_components/Header";
 export default function App() {
 
   return (
-    <div>
-      <Header/>
-      
-    </div>
+    <>
+      <div className="header-login w-full sm:w-3/4">
+          <Header/>
+          <LoginSection/>
+      </div>
+      <div className="extra-information w-full sm:w-1/3 h-full">
+        <ExtraInformations/>
+      </div>
+    </>
+    
+    
+    
   )
   
 }
