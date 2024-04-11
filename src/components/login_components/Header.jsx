@@ -7,7 +7,7 @@ export default function Header() {
                 <div className="componey-name flex"> <h3>Ushirik Educ Sytem</h3> </div>
             </div>
 
-            <div className="donate"><button>Donate</button></div>
+            <div className="donate"><button>Login</button></div>
         </div>
         
     )

@@ -6,7 +6,7 @@ export default function LoginSection() {
             firstName : "",
             lastName : "",
             email : "" ,
-            password  : "" ,
+            password  : "12345" ,
         }
     );
 
@@ -20,65 +20,94 @@ export default function LoginSection() {
             };
         });
     }
+
+    // Create Account 
+    function createAccount(event) {
+        event.preventDefault();
+    
+        // Assuming your server endpoint is "/api/register"
+        fetch("http://localhost:8850/api/v1/auth/admin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Server response:", data);
+            // Optionally, you can perform some action after receiving a response from the server
+        })
+        .catch(error => {
+            console.error("There was a problem with the request:", error);
+        });
+    }
+    
     
     return (
         <div className="login-section flex">
-            <form action="" className="flex">
+            <form action="" className="flex" method="post" onSubmit={createAccount}>
                 <h2 className="form-title mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                     Créer Un compte
                 </h2>
                 <div className="firstName">
+                    <div><label>Prenom</label></div>
                     <input 
                         type="text"
                         name="firstName"
                         id="firstName" 
-                        placeholder="Nom"
+                        placeholder="Ahadi"
                         onChange={gatherData}
                         value={formData.firstName}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                
                     />
                 </div>
                 <div className="lastName">
+                    <div><label>Prenom</label></div> 
                     <input 
                         type="text"
                         name="lastName"
                         id="lastName" 
-                        placeholder="Prenom"
+                        placeholder="Gloire"
                         onChange={gatherData}
                         value={formData.lastName}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                
                     />
                 </div>
                 <div className="email">
+                    <div><label>E-Mail</label></div>
                     <input 
                         type="email"
                         name="email"
                         id="email" 
-                        placeholder="E-mail"
+                        placeholder="gloire@gmail.com"
                         onChange={gatherData}
-                        value={formData.lastName}
+                        value={formData.email}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            
                     />
                 </div>
 
-                <div className="password">
-                    <input 
-                        type="password"
-                        name="password"
-                        id="password" 
-                        placeholder="Mot de passe"
-                        onChange={gatherData}
-                        value={formData.lastName}
-                    />
-                </div>
-                <div className="phone">
-                    <input 
-                        type="tel"
-                        name="phone"
-                        id="phone" 
-                        placeholder="phone"
-                        onChange={gatherData}
-                        value={formData.lastName}
-                    />
-                </div>
-                <button>Créer</button>
+                <div className="passoword">
+                <div><label>Nom</label></div>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                 placeholder="Mot de passe"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+                <button className="create-account-button">Créer</button>
 
             </form>
         </div>

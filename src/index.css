@@ -90,9 +90,9 @@ Header button style
 /*Some tests*/ 
 
 .extra-information {
-    
-
-    background-image: linear-gradient(135deg, #cfdfff, #e8d9ff);
+    background-image: url('ushirik_background2.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
     backdrop-filter: blur(20px);
     margin-top: -10;
     height: 100vh;
@@ -109,7 +109,7 @@ Header button style
 Form title 
 */
 .form-title  {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 form  {
@@ -118,9 +118,12 @@ form  {
 }
 
 form  > h2  , form  > div   {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
-
+label {
+    padding-bottom: 9px;
+    font-size: 13px;
+}
 form input {
     border: 1px solid var(--text-color);
 }
@@ -137,14 +140,9 @@ form input , button {
     border-radius: 6px;
 }
 
-.extra  {
-    font-weight: 800;
-    padding: 20px;
-    font-size: larger;
-    justify-content: center;
-
+.create-account-button{
+    margin-top: 10px;
 }
-
 
 
 
