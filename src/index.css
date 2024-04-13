@@ -161,21 +161,35 @@ form input {
 
 /* School list design starts here */
 
-.school  {
+.schools-administrated {
     gap: 10px;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     padding: 12px;
+
 }
 
-.school .letter-image {
+.schools-administrated .status {
+    font-size: 13px;
+    color: green;
+    background-color:#c2fbd7;
+    height: fit-content;
     padding: 4px;
+    border-radius: 5px;
+}
+
+.school {
+    gap: 10px;
+}
+.school .letter-image {
+    
     width: 60px;
+    padding-top: 15px;
     background-color: var(--body-color);
     justify-content: center;
     align-content: center;
     align-items: center;
     border-radius: 8px;
-    font-size: 35px;
+    font-size: 20px;
 }
 
 .school .school-general-info{
@@ -195,10 +209,48 @@ form input {
 .school .school-general-info .students-teachers{
     margin-top: 5px;
     padding-bottom: 10px;
-    gap: 10px;
+    gap: 3px;
+    font-size: 10px;
+    padding-right: 20px;
     
 }
 
 .schools-list p  {
     margin-bottom: 20px;
+    text-align: center;
+}
+
+.schools-list .title  {
+    padding-bottom: 20px;
+}
+
+.students , .classroom  {
+    gap: 3px;
+}
+.dot-separation  {
+    font-size: 3px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.school .school-general-info .students-teachers > div{
+  
+    padding-right: 5px;
+    
+}
+.action {
+    margin-top: 20px;
+    width: 391px;
+}
+
+.action button  {
+    color: var(--text-color);
+    background-color: var(--body-color);
+    width: 100%;
+}
+
+.action button:hover {
+    background-color: var(--base-color);
+    color: white;
 }
