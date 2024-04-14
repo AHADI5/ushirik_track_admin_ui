@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+
 export default function RegisterSchoolForm() {
     return (
         <div className="login-section school-infos flex">
@@ -145,9 +148,19 @@ export default function RegisterSchoolForm() {
                                     required
                                 />
                             </div> */}
+                            
                         </div>
                     </div>
                 </div>
+                <div className="send-button w-full">
+                    <button className="send-button-icon flex justify-start items-center w-full">
+                        <div className="text">continuer</div>
+                        <div className="icon"><FontAwesomeIcon icon={faArrowRight} className="send-icon"/></div>
+                    </button>
+                </div>
+
+
+
             </form>
         </div>
     )
