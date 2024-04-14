@@ -9,10 +9,10 @@ export default function Registration () {
     return (
     <>
       <div className="header-login w-full sm:w-3/4">
-          <Header shown = {true}/>
+          <Header shown = {0}/>
           <SignUpForms/>
       </div>
-      <div className="extra-information w-full sm:w-1/3 h-full">
+      <div className="extra-information w-full sm:w-1/4 h-full">
         <ExtraInformations/>
       </div>
     </>

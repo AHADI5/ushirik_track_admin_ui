@@ -54,8 +54,12 @@
 
 .header-container {
     justify-content: space-around;
-    gap: 300px;
-    
+    gap: 100px;
+ 
+}
+
+.profile-picture{
+    gap: 10px;
 }
 .header-container .donate {
     padding: 12px;
@@ -132,11 +136,10 @@ form input {
     background-color: var(--base-color);
 }
 
-.login-section form input , button {
+.login-section- form input , button {
     
     padding: 7px;
     width: 350px;
-    color: white;
     border-radius: 6px;
 }
 
@@ -165,6 +168,12 @@ form input {
     gap: 10px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     padding: 12px;
+
+}
+
+.schools-administrated:hover {
+    opacity: 50;
+    cursor: pointer;
 
 }
 
@@ -253,4 +262,31 @@ form input {
 .action button:hover {
     background-color: var(--base-color);
     color: white;
+}
+
+/*school List design Ends here*/
+
+/*Register school form starts here*/
+.title {
+    color: #707070;
+    font-size: small;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+}
+
+.title-{
+    color: #707070;
+    font-size: small;
+    padding-top: 5px;
+    letter-spacing: 4px;
+}
+
+.info input {
+    margin-bottom: 7px;
+
+}
+
+.form-title- {
+    margin-top: 5px;
+
 }

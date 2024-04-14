@@ -53,7 +53,7 @@ export default function SignUpForms() {
     
     
     return (
-        <div className="login-section flex">
+        <div className="login-section login-section- flex">
             <form action="" className="flex" method="post" onSubmit={createAccount}>
                 <h2 className="form-title mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
                     Créer Un compte

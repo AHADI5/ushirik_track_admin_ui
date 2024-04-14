@@ -13,7 +13,7 @@ export default function Schools() {
                         <div className="school flex">
                             <div className="letter-image flex"><p>E</p></div>
                             <div className="school-general-info">
-                                <div className="name">Ecole Primaire majengo</div>
+                                <div className="name ">Ecole Primaire majengo</div>
                                 <div className="students-teachers flex">
                                     <div className="students flex">
                                         <div className="number">950</div>
