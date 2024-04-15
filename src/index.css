@@ -145,6 +145,7 @@ form input {
 
 .create-account-button{
     margin-top: 10px;
+    color: white;
 }
 
 
@@ -306,4 +307,31 @@ form input {
     width: 25px;
     border-radius: 50%
 }
+
+/*user role starts here */
+
+
+
+/*user role ends here */
+
+/*Registration form ends here*/
+
+/*Common dashboard elements design goes here 
+1.Menu
+2.Dashboard
+*/
+
+.logo-name {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top:  -12px;
+    margin-bottom: 5px;
+    letter-spacing: 0.2rem;
+}
+
+
+
+
+
 
