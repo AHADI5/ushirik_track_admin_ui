@@ -6,7 +6,7 @@ import { faUserAlt, faSchool  } from "@fortawesome/free-solid-svg-icons";
 
 export default function AdminDashBoard() {
 
-    {/*defining Admin menus*/}
+  
     const menuComponents = [
         { menu: "Accueil", link: "/adminDashBoard", icon: faHomeAlt },
         { menu: "Utilisateurs", link: "/users", icon: faUserAlt },

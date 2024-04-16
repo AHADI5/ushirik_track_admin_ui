@@ -330,6 +330,59 @@ form input {
     letter-spacing: 0.2rem;
 }
 
+/*Admin dash board design starts here*/
+.dash {
+    background-color: var(--body-color);
+}
+
+.content  {
+    margin-left: 168px;
+}
+.overview  {
+    padding: 12px;
+    background-color: var(--side-bar-color);
+
+}
+
+.icon-over {
+    font-size: small;
+}
+.icon-over .over .added {
+    color: #42A0ED;
+
+}
+
+.icon-over .over .gone {
+    color: rgb(209, 53, 53);
+
+}
+
+
+.over  {
+    gap: 10px;
+}
+
+.icon-over , .over {
+    display: flex;
+}
+
+.icon-over  {
+    justify-content: space-between;
+}
+
+.title-over {
+    opacity: 50%;
+}
+
+.icon-over .number  {
+    font-weight: 700;
+}
+
+.icon-over .icon {
+    font-size: 20px;
+}
+
+
 
 
 

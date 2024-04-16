@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function ProfileDropdown() {
+function ProfileDropdown({role , userName}) {
     const [isShown, setIsShown] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -41,7 +41,7 @@ function ProfileDropdown() {
                 <div className="informations absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
                     <div className="py-3 px-5">
                         <p className="text-sm text-gray-500">Signed in as</p>
-                        <p className="text-sm font-medium text-gray-800">james@site.com</p>
+                        <p className="text-sm font-medium text-gray-800">Gloire</p>
                     </div>
                     <div className="text-xs text-gray-500 px-5 py-2 border-t border-gray-200">
                         Admin
