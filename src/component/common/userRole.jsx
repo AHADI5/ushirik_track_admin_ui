@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import Avatar from 'react-avatar';
 
 function ProfileDropdown() {
     const [isShown, setIsShown] = useState(false);
     const dropdownRef = useRef(null);
 
     //Decoding the token 
-  
-
-    
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -45,11 +43,7 @@ function ProfileDropdown() {
                 className="m-1 mr-2 w-9 h-9 relative flex justify-center items-center rounded-full bg-gray-500 text-xl text-white cursor-pointer"
                 onClick={toggleInformation}
             >
-                <img
-                    src="http://source.unsplash.com/100x100/?woman"
-                    className="rounded-full"
-                    alt="Profile Picture"
-                />
+                <Avatar name={decodedToken["sub"]} round={true} size='30'/>
                 {/* Green status indicator */}
                 <div className="absolute right-0 bottom-0 w-2 h-2 rounded-full bg-green-500"></div>
             </div>

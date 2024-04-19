@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
 import instance from "../common/axios";
+import { TailSpin } from "react-loader-spinner";
 
 export default function LoginForm() {
     const [formData, setFormData] = useState({
@@ -73,7 +74,18 @@ export default function LoginForm() {
                     />
                 </div>
                 <button className="create-account-button" disabled={loading}>
-                    {loading ? "Chargement..." : "Connexion"}
+                    {loading ? <div className="flex justify-center">
+                        <TailSpin
+                            visible={true}
+                            height="30"
+                            width="30"
+                            color="rgb(255,255 ,255)"
+                            ariaLabel="tail-spin-loading"
+                            radius="0.5"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                        />
+                    </div> : "Connexion"}
                 </button>
             </form>
         </div>

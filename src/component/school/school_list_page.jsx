@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from "react";
 import instance from "../common/axios";
 import Avatar from "react-avatar";
-
+import { LineWave } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 export default function Schools() {
     const [schools, setSchools] = useState([]);
-    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {
         const fetchSchools = async () => {
+            setIsLoading(true)
             try {
                 const response = await instance.get("/api/v1/school/admin/schools");
                 setSchools(response.data);
                 console.log(schools[0])
             } catch (error) {
-                setError("Failed to fetch schools.");
+                // setError("Failed to fetch schools.");
+                console.log("error")
             }
+            setIsLoading(false)
         };
 
         fetchSchools();
     }, []);
+
+    //Navigating user to new school registration form
+    const navigate = useNavigate(); 
+
+    function navigateToNewSchool() {
+       
+        navigate("/register-school")
+
+        
+    }
 
     return (
         <div className="login-section schools flex">
@@ -30,8 +44,22 @@ export default function Schools() {
                 <p className="title">
                     Vous pouvez administrer plusieurs écoles avec partir d'une seule adresse mail
                 </p>
-                {error && <p className="error">{error}</p>}
-                <div className="overflow-y-auto max-h-60">
+                {/* {error && <p className="error">{error}</p>} */}
+                {isLoading ?   <div className="flex items-center justify-center">
+                    <LineWave
+                        visible={true}
+                        height={100}
+                        width={100}
+                        color="rgb(68, 137, 217)"
+                        ariaLabel="line-wave-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        firstLineColor=""
+                        middleLineColor=""
+                        lastLineColor=""
+                    />
+                </div> :   
+        <div className="overflow-y-auto max-h-60">
                     <div className="schools">
                         {schools.length === 0 ? (
                             <div className="empty-message">
@@ -70,8 +98,8 @@ export default function Schools() {
                         )}
                     </div>
                     
-                </div>
-                <div className="action"><button>nouvelle Ecole</button></div>
+                </div>}
+                <div className="action" onClick={navigateToNewSchool}><button>nouvelle Ecole</button></div>
             </div>
         </div>
     );
