@@ -190,7 +190,7 @@ form input {
 .school {
     gap: 10px;
 }
-.school .letter-image {
+/* .school .letter-image {
     
     width: 60px;
     padding-top: 15px;
@@ -200,7 +200,7 @@ form input {
     align-items: center;
     border-radius: 8px;
     font-size: 20px;
-}
+} */
 
 .school .school-general-info{
     justify-content: center;

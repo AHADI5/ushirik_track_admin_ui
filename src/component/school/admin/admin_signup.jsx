@@ -1,5 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import instance from "../../common/axios";
+
+
+
+//register admin endpoint 
+const REGISTER_ENDPOINT = "/api/v1/school/schoolAdmin";
 
 export default function SignUpForms() {
     const [formData , setFormData] = React.useState(
@@ -10,6 +15,11 @@ export default function SignUpForms() {
             password  : "12345" ,
         }
     );
+
+    //Loading initialization 
+    //State variable for loading 
+    const [isLoading, setIsLoading] = React.useState(false)
+
 
     function gatherData(event) {
         const { name, value } = event.target; // Destructure value from event.target
@@ -23,33 +33,36 @@ export default function SignUpForms() {
     }
 
     // Create Account 
-    function createAccount(event) {
-        event.preventDefault();
-    
-        // Assuming your server endpoint is "/api/register"
-        fetch("http://localhost:8745/api/v1/school/schoolAdmin", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Server response:", data);
-            localStorage.setItem("token" , data.token)
-            // Optionally, you can perform some action after receiving a response from the server
+    const  createAccount = async (e) => {
+        e.preventDefault();
+
+        //sending information to the backend 
+
+
+        try {
+            const response = await instance.post(
+                REGISTER_ENDPOINT,
+                formData,
+
+            )
+            console.log(response);
+            const token = response.data["token"];
+            //Saving the token on the local storage 
+            localStorage.setItem("token" , token);
+
+            //this code below decodes the token 
             
-        })
-        .catch(error => {
-            console.error("There was a problem with the request:", error);
-        });
-    }
+            window.location.href = "/schools"
+            
+        } catch (error) {
+            console.log("registration failed" )
+            
+        } finally {
+            setIsLoading(false);
+        }
+    
+        
+    };
     
     
     return (
@@ -111,7 +124,7 @@ export default function SignUpForms() {
                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                     />
               </div>
-                <button className="create-account-button">Créer</button>
+                <button className="create-account-button" disabled = {isLoading}> {isLoading  ? "connexion..." : "Créer"} </button>
             </form>
         </div>
     );

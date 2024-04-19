@@ -4,9 +4,9 @@ export default function UsersChart(params) {
     ChartJS.register(ArcElement, Tooltip, Legend);
     const data = {
         labels: [
-          'Red',
-          'Blue',
-          'Yellow'
+          'Parents',
+          'Enseignants',
+          'Directeur'
         ],
         datasets: [{
           label: 'My First Dataset',

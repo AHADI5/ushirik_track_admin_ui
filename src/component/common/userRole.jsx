@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
-function ProfileDropdown({role , userName}) {
+function ProfileDropdown() {
     const [isShown, setIsShown] = useState(false);
     const dropdownRef = useRef(null);
+
+    //Decoding the token 
+  
+
+    
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -19,6 +25,17 @@ function ProfileDropdown({role , userName}) {
 
     function toggleInformation() {
         setIsShown(prevState => !prevState);
+    }
+    const token = localStorage.getItem("token");
+    var decodedToken = "" 
+
+    if (token) {
+        decodedToken = jwtDecode(token);
+        console.log(decodedToken);
+        // Use the decoded token here
+    } else {
+        // Handle case when token is not present in localStorage
+        console.error("Token is missing in localStorage");
     }
 
     return (
@@ -41,10 +58,10 @@ function ProfileDropdown({role , userName}) {
                 <div className="informations absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
                     <div className="py-3 px-5">
                         <p className="text-sm text-gray-500">Signed in as</p>
-                        <p className="text-sm font-medium text-gray-800">Gloire</p>
+                        <p className="text-sm font-medium text-gray-800">{decodedToken["sub"]}</p>
                     </div>
                     <div className="text-xs text-gray-500 px-5 py-2 border-t border-gray-200">
-                        Admin
+                        {decodedToken["authorities"]}
                     </div>
                 </div>
             )}

@@ -1,5 +1,5 @@
 
-import { faArrowDown, faArrowUp, faBabyCarriage, faChalkboardUser, faChessBoard, faClapperboard, faGraduationCap, } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faBabyCarriage, faChalkboardUser, faGraduationCap, } from "@fortawesome/free-solid-svg-icons";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons/faUserGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UsersChart from "../admin/usersChart";

@@ -13,13 +13,13 @@ export default function App() {
     
     <BrowserRouter>
         <Routes>
-            <Route path="/Registration" element ={<Registration/>}/>
+            <Route path="/" element ={<Registration/>}/>
             <Route path="/schools" element = {<Schools/>} />
             <Route path="/login"  element = {<Login/>}/>
             <Route path="/register-school" element = {<SchoolRegistrastionPage/>} />
             {/* <Route path="/admin/" element = {} /> */}
             <Route path="/adminDashBoard" element = {<AdminDashBoard/>}/>
-            <Route path="/"  element = {<DirectorDashBoard/>}/>
+            <Route path="/directorDashBoard"  element = {<DirectorDashBoard/>}/>
         </Routes>
     </BrowserRouter>
   )
