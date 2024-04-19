@@ -2,9 +2,53 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function RegisterSchoolForm() {
+    const [formData , setFormData] = React.useState({
+        
+            name: "",
+            email: "",
+            postalBox: "",
+            adminEmail: "",
+            address: {
+                quarter :  "",
+                avenue  : "",
+                houseNumber : "",
+            },
+            director: {
+                name : "",
+                firstName : "",
+                middleName  : "kazinguvu" ,
+                genre  : "Masculin",
+                address : {
+                    quarter :  "",
+                    avenue  : "",
+                    houseNumber : "",
+
+                
+
+            }
+          
+        
+
+    }) 
+
+    function gatherData(event) {
+        const {name , value} = event.target;
+
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData ,
+                [name] : value
+            };
+        });
+
+    }
+
+    function createSchool () {
+
+    }
     return (
         <div className="login-section school-infos flex">
-            <form className="flex">
+            <form className="flex" onSubmit={createSchool}>
                  <h2 className="form-title- mt-10 text-left text-1xl font-bold leading-9 tracking-tight">
                         Enregistrer une Ecole
                 </h2>
@@ -24,6 +68,8 @@ export default function RegisterSchoolForm() {
                                         id="schoolname"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
+                                        onChange={gatherData}
+                                        
                                     />
                                 </div>
                                 <div className="info">
@@ -34,6 +80,7 @@ export default function RegisterSchoolForm() {
                                         id="schoolemail"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
+                                        onChange={gatherData}
                                     />
                                 </div>
                                 <div className="info">
@@ -44,6 +91,7 @@ export default function RegisterSchoolForm() {
                                         id="schoolpostal"
                                         className="w-full px-4 py-1 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
+                                        onChange={gatherData}
                                     />
                                 </div>
                             </div>
@@ -57,6 +105,7 @@ export default function RegisterSchoolForm() {
                                         id="schoolquarter"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
+                                        onChange={gatherData}
                                     />
                                 </div>
                                 <div className="info">
@@ -67,6 +116,7 @@ export default function RegisterSchoolForm() {
                                         id="schoolavenue"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
+                                        onChange={gatherData}
                                     />
                                 </div>
                                 {/* <div className="info">
@@ -103,6 +153,7 @@ export default function RegisterSchoolForm() {
                                     id="directorlastname"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
+                                    onChange={gatherData}
                                 />
                             </div>
                             <div className="info">
@@ -113,6 +164,7 @@ export default function RegisterSchoolForm() {
                                     id="directoremail"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
+                                    onChange={gatherData}
                                 />
                             </div>
                         </div>
@@ -126,6 +178,7 @@ export default function RegisterSchoolForm() {
                                     id="directorschoolquarter"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
+                                    onChange={gatherData}
                                 />
                             </div>
                             <div className="info">
@@ -136,6 +189,7 @@ export default function RegisterSchoolForm() {
                                     id="directorschoolavenue"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
+                                    onChange={gatherData}
                                 />
                             </div>
                             {/* <div className="info">
