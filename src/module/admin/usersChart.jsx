@@ -10,7 +10,7 @@ export default function UsersChart(params) {
         ],
         datasets: [{
           label: 'My First Dataset',
-          data: [300, 50, 100],
+          data: [1, 0, 0],
           backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',

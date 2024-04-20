@@ -18,8 +18,9 @@ export default function App() {
             <Route path="/login"  element = {<Login/>}/>
             <Route path="/register-school" element = {<SchoolRegistrastionPage/>} />
             {/* <Route path="/admin/" element = {} /> */}
-            <Route path="/adminDashBoard" element = {<AdminDashBoard/>}/>
+            <Route path="/schoolAdmin/:schoolID" element = {<AdminDashBoard/>}/>
             <Route path="/directorDashBoard"  element = {<DirectorDashBoard/>}/>
+            
         </Routes>
     </BrowserRouter>
   )

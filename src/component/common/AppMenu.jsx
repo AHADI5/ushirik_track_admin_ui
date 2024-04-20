@@ -7,7 +7,7 @@ export default function AppMenu({menus}) {
         <div className="">
             <div className="logo-name flex flex-col ">
                 <div className="logo-nav h-8 w-8">
-                    <img src="ushirik-logo.svg" alt="" />
+                    <img src="ushirik-logo.svg" alt="logo" />
                 </div>
                 <div className="app-name">
                     <span>Ushirik</span>

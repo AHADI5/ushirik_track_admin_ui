@@ -3,6 +3,7 @@ import instance from "../common/axios";
 import Avatar from "react-avatar";
 import { LineWave } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function Schools() {
     const [schools, setSchools] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -68,7 +69,9 @@ export default function Schools() {
                             </div>
                         ) : (
                             schools.map(school => (
-                                <div className="schools-administrated flex" key={school.id}>
+                                <Link to={`/schoolAdmin/${school.schoolID}`}>
+
+                            <div className="schools-administrated flex" key={school.schoolID}>
                                     <div className="school flex">
                                         <div className="letter-image flex"><p><Avatar name={school.name} round={true} size="50" /></p></div>
                                         <div className="school-general-info">
@@ -93,14 +96,15 @@ export default function Schools() {
                                     </div>
                                     <div className="status">{school.status}</div>
                                 </div>
+                                </Link>
                                 
                             ))
                         )}
                     </div>
                     
                 </div>}
-                <div className="action" onClick={navigateToNewSchool}><button>nouvelle Ecole</button></div>
-            </div>
+                <div className="action flex justify-center " onClick={navigateToNewSchool}><button>nouvelle Ecole</button></div>
+            </div> 
         </div>
     );
 }
