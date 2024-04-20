@@ -1,134 +1,158 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
-import getToken from "../../common/getToken";
+import React, { useState } from "react";
+import token from "../../common/getToken";
+import { jwtDecode } from "jwt-decode";
+import instance from "../../common/axios";
+import { useNavigate } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
+
 
 export default function RegisterSchoolForm() {
-   const adminEmail = getToken["sub"];
-   const [formData , setFormData] = React.useState(
-        {
-            
-        }
-   )
-   const [schoolData , setSchoolData] = React.useState({
-            name: "",
-            schoolEmail: "",
-            postalBox: "",
-            adminEmail: adminEmail,
-
-   });
-
-   const [schoolAddress , setSchoolAddress] = React.useState({
-        schoolQuarter :  "",
-        schoolAvenue  : "",
-   })
-
-   const [directorAddress , setDirectorAddress] = React.useState({
-        quarter :  "",
-        avenue  : "",
-    })
-
-   
-    const [directorData , setDirectorData] = React.useState({
-                firstName : "",
-                lastName : "",
-                directorEmail  : "" 
-            });
-        
-            
+    //Extracting admin mail from the token  
+    const adminEmail  = jwtDecode(token)['sub']
     
+    //Error use state 
+    const [error , setError] = React.useState("");
+    const [isLoading , setLoading] = React.useState(false);
+    const navigate = useNavigate()
+   
+    const [schoolData, setSchoolData] = useState({
+        name: "",
+        email: "",
+        postalBox: "",
+        adminEmail: adminEmail
+    });
 
-    function gatherData(event) {
-        const {name , value} = event.target;
-        
+    const [schoolAddress, setSchoolAddress] = useState({
+        schoolQuarter: "",
+        schoolAvenue: "",
+     
+    });
 
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData ,
-                [name] : value
-            };
-        });
+    const [directorData, setDirectorData] = useState({
+        firstName: "",
+        lastName: "",
+        directorEmail: ""
+    });
 
-        setSchoolData(prevFormData => {
-            return {
-                ...prevFormData ,
-                [name] : value
-            };
-        });
+    const [directorAddress, setDirectorAddress] = useState({
+        quarter: "",
+        avenue: "",
+    });
 
-        setSchoolAddress(prevFormData => {
-            return {
-                ...prevFormData ,
-                [name] : value
-            };
-        });
+    const [formData, setFormData] = React.useState({});
 
-        setDirectorAddress(prevFormData => {
-            return {
-                ...prevFormData ,
-                [name] : value
-            };
-        });
+    const gatherData = (event) => {
+        const { name, value } = event.target;
+        const [section, field] = name.split('_');
 
-        setDirectorData(prevFormData => {
-            return {
-                ...prevFormData ,
-                [name] : value
-            };
-        });
+        switch (section) {
+            case 'school':
+                setSchoolData(prevData => ({
+                    ...prevData,
+                    [field]: value
+                }));
+                break;
+            case 'schoolAddress':
+                setSchoolAddress(prevData => ({
+                    ...prevData,
+                    [field]: value
+                }));
+                break;
+            case 'director':
+                setDirectorData(prevData => ({
+                    ...prevData,
+                    [field]: value
+                }));
+                break;
+            case 'directorAddress':
+                setDirectorAddress(prevData => ({
+                    ...prevData,
+                    [field]: value
+                }));
+                break;
+            default:
+                break;
+        }
 
-        setFormData (() => {
-            return {
-        
-                schoolData,
-                "address" :{schoolAddress},
-                "director" : {
-                    directorData,
-                    "address" : {directorAddress}
+        setFormData({
+            name: schoolData.name,
+            email: schoolData.email,
+            postalBox: schoolData.postalBox,
+            adminEmail: schoolData.adminEmail,
+            address: {
+                ...schoolAddress
+            },
+            director: {
+          
+                firstName: directorData.firstName,
+                lastName: directorData.lastName,
+                directorEmai :directorData.directorEmail,
+                address: {
+                    ...directorAddress
+                }
+            }
+        });        
+    }
+
+
+    const schoolCreation = async (event) => {
+        event.preventDefault();
+        setError("");
+        setLoading(true);
+    
+        try {
+            const response = await instance.post("/api/v1/school/register-school", formData, {
+                headers: {
+                    'Content-Type': 'application/json'
                 },
                 
-            }
-        })
+            });
 
-    }
-
-    console.log(formData);
-
-    function createSchool () {
-
-    }
+            
+         
+    
+            // On success, redirect the user to the updated school list
+            navigate("/schools") 
+        } catch (error) {
+            setError("Les informations sont incorrectes.");
+        }
+    
+        setLoading(false);
+        console.log(JSON.stringify(formData))
+       
+    };
+    
     return (
         <div className="login-section school-infos flex">
-            <form className="flex" onSubmit={createSchool}>
-                 <h2 className="form-title- mt-10 text-left text-1xl font-bold leading-9 tracking-tight">
-                        Enregistrer une Ecole
+            <form className="flex" onSubmit={schoolCreation}>
+                <h2 className="form-title- mt-10 text-left text-1xl font-bold leading-9 tracking-tight">
+                    Enregistrer une Ecole
                 </h2>
+                <p className="text-left text-1xl text-red-500">{error}</p>
                 <div className="informations grid grid-cols-2 gap-10">
-               
-                    
                     <div className="school-informations">
                         <div className="infos">
-                            
                             <div className="general">
                                 <div className="title">ECOLE</div>
                                 <div className="info">
                                     <div><label htmlFor="name">Nom <span className="text-red-500">*</span></label></div>
                                     <input
                                         type="text"
-                                        name="name"
+                                        name="school_name"
                                         id="schoolname"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
                                         onChange={gatherData}
                                         value={schoolData.name}
-                                        
                                     />
                                 </div>
                                 <div className="info">
                                     <div><label htmlFor="schoolemail">Email <span className="text-red-500">*</span></label></div>
                                     <input
                                         type="email"
-                                        name="schoolEmail"
+                                        name="school_email"
                                         id="schoolemail"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
@@ -140,7 +164,7 @@ export default function RegisterSchoolForm() {
                                     <div><label htmlFor="schoolpostal">Boite Postale <span className="text-red-500">*</span></label></div>
                                     <input
                                         type="text"
-                                        name="postalBox"
+                                        name="school_postalBox"
                                         id="schoolpostal"
                                         className="w-full px-4 py-1 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
@@ -149,13 +173,12 @@ export default function RegisterSchoolForm() {
                                     />
                                 </div>
                             </div>
-                          
                             <div className="address">
                                 <div className="info">
                                     <div><label htmlFor="schoolquarter">Quartier <span className="text-red-500">*</span></label></div>
                                     <input
                                         type="text"
-                                        name="schoolQuarter"
+                                        name="schoolAddress_schoolQuarter"
                                         id="schoolquarter"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
@@ -167,7 +190,7 @@ export default function RegisterSchoolForm() {
                                     <div><label htmlFor="schoolAvenue">Avenue <span className="text-red-500">*</span></label></div>
                                     <input
                                         type="text"
-                                        name="schoolAvenue"
+                                        name="schoolAddress_schoolAvenue"
                                         id="schoolAvenue"
                                         className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                         required
@@ -175,16 +198,6 @@ export default function RegisterSchoolForm() {
                                         value={schoolAddress.schoolAvenue}
                                     />
                                 </div>
-                                {/* <div className="info">
-                                    <div><label htmlFor="schoolnumber">Numero <span className="text-red-500">*</span></label></div>
-                                    <input
-                                        type="text"
-                                        name="schoolnumber"
-                                        id="schoolnumber"
-                                        className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500 w-64"
-                                        required
-                                    />
-                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -195,7 +208,7 @@ export default function RegisterSchoolForm() {
                                 <div><label htmlFor="directorname">Nom <span className="text-red-500">*</span></label></div>
                                 <input
                                     type="text"
-                                    name="firstName"
+                                    name="director_firstName"
                                     id="name"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
@@ -204,22 +217,22 @@ export default function RegisterSchoolForm() {
                                 />
                             </div>
                             <div className="info">
-                                <div><label htmlFor="middleName">Prenom <span className="text-red-500">*</span></label></div>
+                                <div><label htmlFor="lastName">Prenom <span className="text-red-500">*</span></label></div>
                                 <input
                                     type="text"
-                                    name="lastName"
+                                    name="director_lastName"
                                     id="directorlastname"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
                                     onChange={gatherData}
-                                    value={directorData.lastName}
+                                    value={directorData.latName}
                                 />
                             </div>
                             <div className="info">
                                 <div><label htmlFor="email">Email <span className="text-red-500">*</span></label></div>
                                 <input
                                     type="email"
-                                    name="directorEmail"
+                                    name="director_directorEmail"
                                     id="directoremail"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
@@ -228,13 +241,12 @@ export default function RegisterSchoolForm() {
                                 />
                             </div>
                         </div>
-                    
                         <div className="address">
                             <div className="info">
                                 <div><label htmlFor="quarter">Quartier <span className="text-red-500">*</span></label></div>
                                 <input
                                     type="text"
-                                    name="quarter"
+                                    name="directorAddress_quarter"
                                     id="directorchoolquarter"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
@@ -246,7 +258,7 @@ export default function RegisterSchoolForm() {
                                 <div><label htmlFor="avenue">Avenue <span className="text-red-500">*</span></label></div>
                                 <input
                                     type="text"
-                                    name="avenue"
+                                    name="directorAddress_avenue"
                                     id="directorschoolavenue"
                                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                                     required
@@ -254,32 +266,29 @@ export default function RegisterSchoolForm() {
                                     value={directorAddress.avenue}
                                 />
                             </div>
-                            {/* <div className="info">
-                                <div><label htmlFor="directorschoolnumber">Numero <span className="text-red-500">*</span></label></div>
-                                <input
-                                    type="text"
-                                    name="directorschoolnumber"
-                                    id="directorschoolnumber"
-                                    className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500 w-64"
-                                    required
-                                />
-                            </div> */}
-                            
                         </div>
                     </div>
                 </div>
                 <div className="send-button w-full">
-                    <button className="send-button-icon flex justify-start items-center w-full">
-                        <div className="text">continuer</div>
+                    <button className="send-button-icon flex justify-start items-center w-full" type="submit">
+                        <div className="text">
+                        {isLoading ? <div className="flex justify-center">
+                        <TailSpin
+                            visible={true}
+                            height="30"
+                            width="30"
+                            color="rgb(255,255 ,255)"
+                            ariaLabel="tail-spin-loading"
+                            radius="0.5"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                        />
+                    </div> : "Connexion"}
+                        </div>
                         <div className="icon"><FontAwesomeIcon icon={faArrowRight} className="send-icon"/></div>
                     </button>
                 </div>
-
-
-
             </form>
         </div>
-    
-
-)}
-
+    );
+}

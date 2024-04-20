@@ -1,5 +1,6 @@
 import { FontAwesomeIcon  } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import logo from '../../assets/ushirik-logo.svg'
 
 export default function AppMenu({menus}) {
     return (
@@ -7,7 +8,7 @@ export default function AppMenu({menus}) {
         <div className="">
             <div className="logo-name flex flex-col ">
                 <div className="logo-nav h-8 w-8">
-                    <img src="ushirik-logo.svg" alt="logo" />
+                    <img src={logo} alt="logo" />
                 </div>
                 <div className="app-name">
                     <span>Ushirik</span>
