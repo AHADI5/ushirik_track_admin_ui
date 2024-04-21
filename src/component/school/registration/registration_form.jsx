@@ -88,7 +88,7 @@ export default function RegisterSchoolForm() {
           
                 firstName: directorData.firstName,
                 lastName: directorData.lastName,
-                directorEmai :directorData.directorEmail,
+                directorEmail :directorData.directorEmail,
                 address: {
                     ...directorAddress
                 }

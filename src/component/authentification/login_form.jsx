@@ -42,7 +42,9 @@ export default function LoginForm() {
                 <h2 className="form-title mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
                     Connectez-vous
                 </h2>
-                {error && <div className="error-message">{error}</div>}
+                {error && <div className="error-message">
+                    {error}
+                    </div>}
                 <div className="email">
                     <div>
                         <label htmlFor="email">E-Mail</label>

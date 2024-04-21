@@ -1,5 +1,6 @@
 import React from "react";
 import instance from "../../common/axios";
+import { TailSpin } from "react-loader-spinner";
 
 
 
@@ -18,7 +19,8 @@ export default function SignUpForms() {
 
     //Loading initialization 
     //State variable for loading 
-    const [isLoading, setIsLoading] = React.useState(false)
+    const [isLoading, setIsLoading] = React.useState(false);
+
 
 
     function gatherData(event) {
@@ -35,6 +37,7 @@ export default function SignUpForms() {
     // Create Account 
     const  createAccount = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         //sending information to the backend 
 
@@ -49,6 +52,9 @@ export default function SignUpForms() {
             const token = response.data["token"];
             //Saving the token on the local storage 
             localStorage.setItem("token" , token);
+
+            //Set is loading to false 
+            setIsLoading(false);
 
             //this code below decodes the token 
             
@@ -124,7 +130,26 @@ export default function SignUpForms() {
                     className="w-full px-4 py-1.5 rounded-lg border focus:outline-none focus:border-blue-500"
                     />
               </div>
-                <button className="create-account-button" disabled = {isLoading}> {isLoading  ? "connexion..." : "Créer"} </button>
+                <button className="create-account-button" disabled = {isLoading}> 
+                    {
+                        isLoading  ?
+
+                        <div className="flex justify-center">
+                            <TailSpin
+                            visible={true}
+                            height="30"
+                            width="30"
+                            color="rgb(255,255 ,255)"
+                            ariaLabel="tail-spin-loading"
+                            radius="0.5"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            />
+                        </div>
+                        
+                    : "Créer"
+                    } 
+                </button>
             </form>
         </div>
     );
