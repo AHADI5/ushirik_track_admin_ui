@@ -392,8 +392,19 @@ form input {
     text-align: center;
 }
 
+.table-action  {
+    width: 5rem;
+    gap: 10px;
+ 
+}
 
+.table-navigation {
+    gap: 10px;
+}
 
+.general-user-action  {
+    width: 6rem;
+}
 
 
 
