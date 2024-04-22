@@ -45,7 +45,7 @@ export default function AdminDashContent (schoolID) {
   }, []);
 
   return (
-    <div class="content bg-slate-200 w-fullflex justify-center min-h-screen pt-6 px-2 sm:px-6 md:px-8">
+    <div class="content bg-slate-200 w-fullflex justify-center pt-6 px-1 sm:px-6 md:px-8">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {/* First div with four equal-sized blocks */}
         <div className=" h-24 md:h-auto overview ">
@@ -237,7 +237,10 @@ export default function AdminDashContent (schoolID) {
           {/*Current users goes here*/}
 
         </div>
-        <div className="h-24 md:h-auto overview"> <UsersChart /></div>
+        <div className="h-24 md:h-auto overview">
+          <h6 className="text-left font-semibold">Types Utilisateurs</h6>
+          <UsersChart />
+        </div>
       </div>
     </div>
   );

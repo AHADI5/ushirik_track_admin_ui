@@ -337,7 +337,8 @@ form input {
 }
 
 .content  {
-    margin-left: 168px;
+    margin-left: 160px;
+    height: 80vh;
 }
 .overview  {
     padding: 12px;
@@ -383,6 +384,13 @@ form input {
     font-size: 20px;
 }
 
+.link{
+    background-color: var(--body-color);
+    color: var(--primary-color);
+    padding: 2px;
+    width: 150px;
+    text-align: center;
+}
 
 
 
