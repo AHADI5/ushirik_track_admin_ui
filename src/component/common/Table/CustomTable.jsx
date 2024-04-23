@@ -17,8 +17,8 @@ const TableWithPagination = ({ headers, content }) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="content p-4 overflow-x-auto">
-        <>
+    <div className="content p-4 content-table ">
+        
             <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
                 {/* Table headers */}
                 <thead className="bg-gray-100 border-b">
@@ -115,8 +115,6 @@ const TableWithPagination = ({ headers, content }) => {
               </div>
             </div>
           </nav>
-        </>
-      
     </div>
   );
 };

@@ -15,7 +15,7 @@ import Parents from "./component/users/parents"
 import Teachers from "./component/users/teachers"
 import AllUsers from "./component/users/All"
 import ClassRoomList from "./classRoom/classRoomList"
-import ClassroomFormModal from "./classRoom/registerClassRoom"
+
 export default function App() {
 
   return (
@@ -39,7 +39,7 @@ export default function App() {
                 </Route>
                 <Route path="/schoolAdmin/:schoolID/informations" element = {<SchoolDetails/>}/>
                 <Route path="/schoolAdmin/:schoolID/classRooms" element = {<ClassRoomList/>}/>
-                <Route path="/schoolAdmin/:schoolID/classRooms/newClassroom" element = {<ClassroomFormModal/>}/>
+                {/* <Route path="/schoolAdmin/:schoolID/classRooms/newClassroom" element = {<ModalWithFields/>}/> */}
                   
               </Route>
               <Route element = {<DirectorSideBar/>}>
