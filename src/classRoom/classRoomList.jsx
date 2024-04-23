@@ -24,8 +24,9 @@ const ExampleComponent = () => {
       setLoading(true);
       try {
         // Fetch your data using axios
-        const response = await instance.get("/api/data"); // Replace "/api/data" with your actual API endpoint
+        const response = await instance.get(`/api/v1/classroom/${params["schoolID"]}/classrooms`); 
         setData(response.data); // Assuming your data is an array of objects
+        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -36,16 +37,18 @@ const ExampleComponent = () => {
   }, []);
 
   // Define your table headers
-  const headers = ["ID", "Niveau", "Eleve", "Enseignant", "Cours"];
+  const headers = ["ID", "Niveau","Lettre", "Eleve", "Enseignant", "Cours"];
 
   // Map your data to rows for the table content
   //TODO customize for classroom  list
   const content = data.map((item) => [
-    item.id,
-    `${item.firstName} ${item.lastName}`,
-    item.email,
-    item.role,
-    item.enabled ? "Active" : "Inactive",
+    item.classRoomID,
+    transformInLetter(item.level),
+    item.letter,
+    item.studentNumber  ,
+    item.teacherName === " " ? "ASSIGN" : item.studentNumber,
+    item.courseNumber,
+    
   ]);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -73,6 +76,38 @@ const ExampleComponent = () => {
     // Close the modal after form submission
     setIsModalOpen(false);
   };
+
+  function transformInLetter(number) {
+    var letter
+    switch (number) {
+        case 1:
+            letter = 'PREMIERE'
+            break;
+        case 2:
+            letter = 'DEUXIEME'
+            break;
+        case 3:
+            letter = 'TROISIEME'
+            break;
+        case 4:
+            letter = 'QUATRIEME'
+            break;
+        case 5:
+            letter = 'CINQUIEME'
+            break;
+        case 6:
+            letter = 'CINQUIEME'
+            break;
+    
+        default:
+            break;
+        
+            
+    }
+
+    return letter;
+    
+  }
 
 
 
