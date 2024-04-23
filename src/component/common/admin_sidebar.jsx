@@ -8,7 +8,8 @@ export default function Layout() {
         { menu: "Accueil", link: `/schoolAdmin/${params['schoolID']}`, icon: faHomeAlt },
         { menu: "Utilisateurs", link: `/schoolAdmin/${params['schoolID']}/users`, icon: faUserAlt },
         { menu: "Ecole", link: `/schoolAdmin/${params['schoolID']}/informations`, icon: faSchool },
-        { menu: "Classes", link: `/schoolAdmin/${params['schoolID']}/classrooms`, icon: faChalkboardTeacher }
+        { menu: "Classes", link: `/schoolAdmin/${params['schoolID']}/classrooms`, icon: faChalkboardTeacher },
+        
     ];
 
     return (

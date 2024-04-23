@@ -34,39 +34,36 @@ export default function AllUsers () {
 
   const paginate = pageNumber => setCurrentPage (pageNumber);
   // Function to deactivate a user
-  const deactivateUser = async (userName) => {
+  const deactivateUser = async userName => {
     try {
       // Send request to deactivate user
-      await instance.put(`/api/v1/auth/${userName}/disableUser`);
+      await instance.put (`/api/v1/auth/${userName}/disableUser`);
       // Update user status in state
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.email === userName ? { ...user, enabled: false } : user
+      setUsers (prevUsers =>
+        prevUsers.map (
+          user => (user.email === userName ? {...user, enabled: false} : user)
         )
       );
     } catch (error) {
-      console.error("Error deactivating user:", error);
+      console.error ('Error deactivating user:', error);
     }
   };
 
   // Function to activate a user
-  const activateUser = async (userName) => {
+  const activateUser = async userName => {
     try {
       // Send request to activate user
-      await instance.put(`/api/v1/auth/${userName}/enableUser`);
+      await instance.put (`/api/v1/auth/${userName}/enableUser`);
       // Update user status in state
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.email === userName ? { ...user, enabled: true } : user
+      setUsers (prevUsers =>
+        prevUsers.map (
+          user => (user.email === userName ? {...user, enabled: true} : user)
         )
       );
     } catch (error) {
-      console.error("Error activating user:", error);
+      console.error ('Error activating user:', error);
     }
   };
-
-
-  
 
   return (
     <div className="pt-4 sm:px-6 md:px-8">
@@ -88,61 +85,59 @@ export default function AllUsers () {
                 Status
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions 
+                Actions{' '}
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-  {loading ? (
-    <tr>
-      <td colSpan="5" className="text-center py-4">
-        Loading...
-      </td>
-    </tr>
-  ) : currentUsers.length === 0 ? (
-    <tr>
-      <td colSpan="5" className="text-center py-4">
-        No users found
-      </td>
-    </tr>
-  ) : (
-    currentUsers.map((user) => (
-      <tr key={user.userID}>
-        <td className="px-6 py-4 whitespace-nowrap">{`${user.firstName} ${user.lastName}`}</td>
-        <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-        <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          {user.enabled ? (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-              Active
-            </span>
-          ) : (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-              Blocked
-            </span>
-          )}
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          {user.enabled ? (
-            <button
-              onClick={() => deactivateUser(user.email)}
-              className="general-user-action flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500"
-            >
-              Deactivate
-            </button>
-          ) : (
-            <button
-              onClick={() => activateUser(user.email)}
-              className="general-user-action flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              Activate
-            </button>
-          )}
-        </td>
-      </tr>
-    ))
-  )}
-</tbody>
+            {loading
+              ? <tr>
+                  <td colSpan="5" className="text-center py-4">
+                    Loading...
+                  </td>
+                </tr>
+              : currentUsers.length === 0
+                  ? <tr>
+                      <td colSpan="5" className="text-center py-4">
+                        No users found
+                      </td>
+                    </tr>
+                  : currentUsers.map (user => (
+                      <tr key={user.userID}>
+                        <td className="px-6 py-4 whitespace-nowrap">{`${user.firstName} ${user.lastName}`}</td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {user.email}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {user.role}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {user.enabled
+                            ? <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Active
+                              </span>
+                            : <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                Blocked
+                              </span>}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {user.enabled
+                            ? <button
+                                onClick={() => deactivateUser (user.email)}
+                                className="general-user-action flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+                              >
+                                Deactivate
+                              </button>
+                            : <button
+                                onClick={() => activateUser (user.email)}
+                                className="general-user-action flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                              >
+                                Activate
+                              </button>}
+                        </td>
+                      </tr>
+                    ))}
+          </tbody>
 
         </table>
       </div>
@@ -189,7 +184,6 @@ export default function AllUsers () {
                 onClick={() => paginate (currentPage - 1)}
                 disabled={currentPage === 1}
                 className="table-action relative  items-center justify-center  border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-            
               >
                 <span className="sr-only">Previous</span>
                 <FontAwesomeIcon icon={faChevronLeft} />
@@ -198,7 +192,6 @@ export default function AllUsers () {
                 onClick={() => paginate (currentPage + 1)}
                 disabled={indexOfLastUser >= users.length}
                 className="table-action relative inline-flex items-center justify-center px-2 py-2  border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-            
               >
                 <span className="sr-only">Next</span>
                 <FontAwesomeIcon icon={faChevronRight} />

@@ -406,5 +406,20 @@ form input {
     width: 6rem;
 }
 
+.header {
+    margin-left: 180px;
+    padding: 0px;
+    margin-top: 8px;
+}
+
+header h2  {
+    margin-left: 180px;
+}
+
+.add-button{
+    
+    width: fit-content;
+}
+
 
 

@@ -14,6 +14,8 @@ import UserTab from "./component/users/userTab"
 import Parents from "./component/users/parents"
 import Teachers from "./component/users/teachers"
 import AllUsers from "./component/users/All"
+import ClassRoomList from "./classRoom/classRoomList"
+import ClassroomFormModal from "./classRoom/registerClassRoom"
 export default function App() {
 
   return (
@@ -29,16 +31,16 @@ export default function App() {
               <Route path="/schoolAdmin/:schoolID" element= {<Layout/>}>
                 <Route path="/schoolAdmin/:schoolID" element = {<AdminDashBoard/>}/>
                 <Route path="/schoolAdmin/:schoolID/users"  element = {<UserTab/>}> 
-                {/* All Users */}
-                  
+
                     <Route path="/schoolAdmin/:schoolID/users" element= {<AllUsers/>}></Route>
                     <Route path="/schoolAdmin/:schoolID/users/parent" element = {<Parents/>}></Route>
                     <Route path="/schoolAdmin/:schoolID/users/teacher" element = {<Teachers/>}></Route>
 
-                {/* Parents */}
                 </Route>
                 <Route path="/schoolAdmin/:schoolID/informations" element = {<SchoolDetails/>}/>
-                <Route path="/schoolAdmin/:schoolID/classRooms" element = {<SchoolDetails/>}/>
+                <Route path="/schoolAdmin/:schoolID/classRooms" element = {<ClassRoomList/>}/>
+                <Route path="/schoolAdmin/:schoolID/classRooms/newClassroom" element = {<ClassroomFormModal/>}/>
+                  
               </Route>
               <Route element = {<DirectorSideBar/>}>
                 <Route path="/schoolDirection"  element = {<DirectorDashBoard/>}/>
