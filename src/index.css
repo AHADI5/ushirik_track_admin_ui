@@ -331,6 +331,9 @@ form input {
     letter-spacing: 0.2rem;
 }
 
+.nav-menu {
+    padding: 0;
+}
 /*Admin dash board design starts here*/
 .dash {
     background-color: var(--body-color);

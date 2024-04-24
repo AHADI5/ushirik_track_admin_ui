@@ -70,6 +70,7 @@ const ExampleComponent = () => {
   };
   const handleSubmit = () => {
     // Handle form submission here
+    
 
     //Gather data , transform classRoom to list
     console.log("Form submitted", fields);

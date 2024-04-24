@@ -7,7 +7,7 @@ export default function UserTab() {
         <>
             <div className="content pt-6 px-1 sm:px-6 md:px-8">
                 <div className="users pb-5">
-                    <h2 className=" text-gray-500 font-bold text-2xl">Utilisateurs</h2>
+                    <h2 className=" text-gray-500 font-bold">Utilisateurs</h2>
                 </div>
                 <div className="tabs flex gap-10 pb-4 ">
                     <NavLink 
@@ -22,14 +22,14 @@ export default function UserTab() {
                     to={`/schoolAdmin/${params['schoolID']}/users/parent`}
                     className={({isActive}) => isActive ? "link" : null }
                     >
-                    Enseignants
+                    Parents
                     </NavLink>
 
                     <NavLink 
                     to={`/schoolAdmin/${params['schoolID']}/users/teacher`}
                     className={({isActive}) => isActive ? "link" : null }
                     >
-                    Parents
+                    Enseignants
                     </NavLink>
                 </div>
                 <Outlet/>

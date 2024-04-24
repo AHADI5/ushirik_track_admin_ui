@@ -15,6 +15,7 @@ import Parents from "./component/users/parents"
 import Teachers from "./component/users/teachers"
 import AllUsers from "./component/users/All"
 import ClassRoomList from "./classRoom/classRoomList"
+import RegisterTeacherForm from "./component/users/AddTeacherForm"
 
 export default function App() {
 
@@ -35,10 +36,12 @@ export default function App() {
                     <Route path="/schoolAdmin/:schoolID/users" element= {<AllUsers/>}></Route>
                     <Route path="/schoolAdmin/:schoolID/users/parent" element = {<Parents/>}></Route>
                     <Route path="/schoolAdmin/:schoolID/users/teacher" element = {<Teachers/>}></Route>
+                    <Route path="/schoolAdmin/:schoolID/users/teacher/newTeacher" element =  {<RegisterTeacherForm/>}/>
 
                 </Route>
                 <Route path="/schoolAdmin/:schoolID/informations" element = {<SchoolDetails/>}/>
                 <Route path="/schoolAdmin/:schoolID/classRooms" element = {<ClassRoomList/>}/>
+                
                 {/* <Route path="/schoolAdmin/:schoolID/classRooms/newClassroom" element = {<ModalWithFields/>}/> */}
                   
               </Route>

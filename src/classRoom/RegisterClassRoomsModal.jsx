@@ -1,9 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
+import instance from "../component/common/axios";
 
 export default function RegisterClassRoomModal({ isOpen, onClose, fields, onAddField, onSelectChange, onNumberChange, onSubmit }) {
-    const handleSubmit = () => {
+    
+    const param = useParams()
+    const handleSubmit = async () => {
         // Transform fields data into the desired format
         const formData = fields.flatMap((field, index) => {
           // Generate an array of objects for each selected level and its corresponding letters
@@ -16,11 +20,17 @@ export default function RegisterClassRoomModal({ isOpen, onClose, fields, onAddF
         // Log the transformed data
         console.log("Form data:", formData);
     
-        // Send formData to the server
-        onSubmit(formData);
+        try {
+          // Send formData to the server
+          const response = await instance.post(`/api/v1/classroom/${param['schoolID']}/registerClassRoom`, formData); // Adjust the endpoint as needed
+          console.log("Server response:", response.data);
     
-        // Close the modal after form submission
-        onClose();
+          // Close the modal after successful submission
+          onClose();
+        } catch (error) {
+          console.error("Error submitting form data:", error);
+          // Optionally, handle errors here
+        }
       };
   
     return (

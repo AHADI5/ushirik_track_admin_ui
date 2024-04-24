@@ -1,7 +1,15 @@
-export default function Parents(params) {
+import DataTable from "../common/Table/CustomUserTable";
+import { useParams } from "react-router-dom";
+
+export default function Parents() {
+    const columns  = ["Name" , "Email" , "Role", "Status" , "Actions"];
+    const params = useParams ();
+    const schoolID = params['schoolID'];
+
     return(
         <>
-        <p>Parent</p>
+       
+        <DataTable columns={columns} fetchDataUrl={`/api/v1/auth/${schoolID}/users/parent`} />
         </>
     )
     

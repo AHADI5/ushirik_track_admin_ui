@@ -6,7 +6,7 @@ import { faChevronRight , faChevronLeft } from "@fortawesome/free-solid-svg-icon
 const TableWithPagination = ({ headers, content }) => {
   // State for pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(5);
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
