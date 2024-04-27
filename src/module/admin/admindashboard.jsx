@@ -1,5 +1,3 @@
-import AppHeader from "../../component/common/AppHeader";
-import AppMenu from "../../component/common/AppMenu";
 import AdminDashContent from "./dashboardContent";
 // import { faHomeAlt } from "@fortawesome/free-solid-svg-icons/faHomeAlt";
 // import { faUserAlt, faSchool  } from "@fortawesome/free-solid-svg-icons";

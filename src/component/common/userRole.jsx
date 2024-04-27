@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Avatar from 'react-avatar';
+import { useNavigate } from 'react-router-dom';
 
 function ProfileDropdown() {
     const [isShown, setIsShown] = useState(false);
@@ -36,6 +37,13 @@ function ProfileDropdown() {
         console.error("Token is missing in localStorage");
     }
 
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      navigate("/login");
+    };
+
     return (
         <div className="relative inline-block text-left" ref={dropdownRef}>
             {/* Profile picture */}
@@ -57,6 +65,9 @@ function ProfileDropdown() {
                     <div className="text-xs text-gray-500 px-5 py-2 border-t border-gray-200">
                         {decodedToken["authorities"]}
                     </div>
+                    <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                        Logout
+                    </button>
                 </div>
             )}
         </div>

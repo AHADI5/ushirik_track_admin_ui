@@ -46,7 +46,7 @@ const ExampleComponent = () => {
     transformInLetter(item.level),
     item.letter,
     item.studentNumber  ,
-    item.teacherName === " " ? "ASSIGN" : item.studentNumber,
+    item.teacherName === " " ? "ASSIGN" : item.teacherName,
     item.courseNumber,
     
   ]);

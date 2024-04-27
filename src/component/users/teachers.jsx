@@ -2,7 +2,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import DataTable from "../common/Table/CustomUserTable";
 export default function Teachers() {
-    const columns  = ["Name" , "Email" , "Role", "Status" , "Actions"];
+    const columns  = ["Name" , "Email" , "Role", "Actions"];
     const params = useParams ();
     const schoolID = params['schoolID'];
     const navigate = useNavigate()

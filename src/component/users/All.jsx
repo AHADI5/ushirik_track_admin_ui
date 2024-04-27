@@ -7,7 +7,7 @@ export default function AllUsers () {
   const [users, setUsers] = useState ([]);
   const [loading, setLoading] = useState (false);
   const [currentPage, setCurrentPage] = useState (1);
-  const [usersPerPage] = useState (10);
+  const [usersPerPage] = useState (4);
   const params = useParams ();
   const schoolID = params['schoolID'];
   console.log (schoolID);

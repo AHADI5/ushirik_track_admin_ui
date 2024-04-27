@@ -427,3 +427,7 @@ header h2  {
 .content-table  {
     height:fit-content;
 }
+
+.user-actions {
+    width: fit-content;
+}

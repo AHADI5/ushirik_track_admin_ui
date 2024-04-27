@@ -1,7 +1,7 @@
 import Schools from "./component/school/admin/school_list_page"
 import Registration from "./component/school/admin/SiginUp_page"
 import Login from "./component/authentification/login"
-import { BrowserRouter , Routes , Route } from "react-router-dom"
+import { Routes , Route  } from "react-router-dom"
 import SchoolRegistrastionPage from "./component/school/registration/register-school"
 import AdminDashBoard from "./module/admin/admindashboard"
 import DirectorDashBoard from "./module/director/directorDashBoard"
@@ -16,41 +16,181 @@ import Teachers from "./component/users/teachers"
 import AllUsers from "./component/users/All"
 import ClassRoomList from "./classRoom/classRoomList"
 import RegisterTeacherForm from "./component/users/AddTeacherForm"
+import EditUser from "./component/users/EditUser"
+
+import PrivateRoute from "./module/auth/ProtectectedComponent"
+import { useAuth } from "./module/auth/useAuth"
+
 
 export default function App() {
 
+  const {authed , role} = useAuth();
+
+ 
+  
   return (
-    
-    <BrowserRouter>
-        <Routes>
+
+      <Routes>
             <Route path="/" element ={<Registration/>}/>
-            <Route path="/schools" element = {<Schools/>} />
             <Route path="/login"  element = {<Login/>}/>
-            <Route path="/register-school" element = {<SchoolRegistrastionPage/>} />
-            {/* <Route path="/admin/" element = {} /> */}
+            <Route path="/schools" element = {
+              <PrivateRoute 
+                role={role}
+                authed={authed}
+                requiredRole={'ADMIN'} >
+                  <Schools/>
+              </PrivateRoute>
+              }
+            />
+            <Route path="/register-school" element = {
+              <PrivateRoute 
+                role={role}
+                authed={authed}
+                requiredRole={'ADMIN'} >
+                  <SchoolRegistrastionPage/>
+              </PrivateRoute>
+              }
+            />
+
+            <Route path="/register-school" element = {
+              <PrivateRoute 
+                role={role}
+                authed={authed}
+                requiredRole={'ADMIN'} >
+                  <SchoolRegistrastionPage/>
+              </PrivateRoute>
+              }
+            />
+
             <Route element = {<CommonHeader/>}>
-              <Route path="/schoolAdmin/:schoolID" element= {<Layout/>}>
-                <Route path="/schoolAdmin/:schoolID" element = {<AdminDashBoard/>}/>
-                <Route path="/schoolAdmin/:schoolID/users"  element = {<UserTab/>}> 
+                  <Route path="/schoolAdmin/:schoolID" element= {<Layout/>}>
+                    <Route 
+                      path="/schoolAdmin/:schoolID"
+                      element = {
+                        <PrivateRoute
+                          role={role}
+                          authed={authed}
+                          requiredRole={'ADMIN'}
+                        >
+                          <AdminDashBoard/>
+                        </PrivateRoute>
+                      
+                      }  
+                    />
+                    
+                    <Route   element = {<UserTab/>}> 
+                        <Route 
+                          path="/schoolAdmin/:schoolID/users"
+                          element = {
+                            <PrivateRoute
+                              role={role}
+                              authed={authed}
+                              requiredRole={'ADMIN'}
+                            >
+                              <AllUsers/>
+                            </PrivateRoute>
+                          
+                          }  
+                        />
+                        <Route 
+                          path="/schoolAdmin/:schoolID/users/teacher"
+                          element = {
+                            <PrivateRoute
+                              role={role}
+                              authed={authed}
+                              requiredRole={'ADMIN'}
+                            >
+                              <Teachers/>
+                            </PrivateRoute>
+                          
+                          }  
+                        />
+                        <Route 
+                          path="/schoolAdmin/:schoolID/users/parent"
+                          element = {
+                            <PrivateRoute
+                              role={role}
+                              authed={authed}
+                              requiredRole={'ADMIN'}
+                            >
+                              <Parents/>
+                            </PrivateRoute>
+                          
+                          }  
+                        />
+                        <Route 
+                          path="/schoolAdmin/:schoolID/users/teacher/newTeacher"
+                          element = {
+                            <PrivateRoute
+                              role={role}
+                              authed={authed}
+                              requiredRole={'ADMIN'}
+                            >
+                              <RegisterTeacherForm/>
+                            </PrivateRoute>
+                          
+                          }  
+                        />
 
-                    <Route path="/schoolAdmin/:schoolID/users" element= {<AllUsers/>}></Route>
-                    <Route path="/schoolAdmin/:schoolID/users/parent" element = {<Parents/>}></Route>
-                    <Route path="/schoolAdmin/:schoolID/users/teacher" element = {<Teachers/>}></Route>
-                    <Route path="/schoolAdmin/:schoolID/users/teacher/newTeacher" element =  {<RegisterTeacherForm/>}/>
+                        <Route 
+                          path="/schoolAdmin/:schoolID/users/teacher/:email"
+                          element = {
+                            <PrivateRoute
+                              role={role}
+                              authed={authed}
+                              requiredRole={'ADMIN'}
+                            >
+                              <EditUser/>
+                            </PrivateRoute>
+                          
+                          }  
+                        />
+                    </Route>
+                    <Route 
+                          path="/schoolAdmin/:schoolID/informations"
+                          element = {
+                            <PrivateRoute
+                              role={role}
+                              authed={authed}
+                              requiredRole={'ADMIN'}
+                            >
+                              <SchoolDetails/>
+                            </PrivateRoute>
+                          
+                          }  
+                        />
 
-                </Route>
-                <Route path="/schoolAdmin/:schoolID/informations" element = {<SchoolDetails/>}/>
-                <Route path="/schoolAdmin/:schoolID/classRooms" element = {<ClassRoomList/>}/>
-                
-                {/* <Route path="/schoolAdmin/:schoolID/classRooms/newClassroom" element = {<ModalWithFields/>}/> */}
-                  
+                        <Route 
+                          path="/schoolAdmin/:schoolID/classRooms"
+                          element = {
+                            <PrivateRoute
+                              role={role}
+                              authed={authed}
+                              requiredRole={'ADMIN'}
+                            >
+                              <ClassRoomList/>
+                            </PrivateRoute>
+                          
+                          }  
+                        /> 
               </Route>
-              <Route element = {<DirectorSideBar/>}>
-                <Route path="/schoolDirection"  element = {<DirectorDashBoard/>}/>
-              </Route>
+        
             </Route>
+
+        
+         
+            
+            
+            
+            
+          
+             
+              
+            
         </Routes>
-    </BrowserRouter>
+
+
+  
   )
   
 }

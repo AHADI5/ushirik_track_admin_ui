@@ -5,6 +5,7 @@ import { LineWave } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 export default function Schools() {
+   
     const [schools, setSchools] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -37,10 +38,12 @@ export default function Schools() {
     }
 
     return (
+        
         <div className="login-section schools flex">
             <div className="schools-list">
                 <h2 className="form-title mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
                     Connectez-vous
+                    { console.log("bla bla bla welcome")}
                 </h2>
                 <p className="title">
                     Vous pouvez administrer plusieurs écoles avec partir d'une seule adresse mail
