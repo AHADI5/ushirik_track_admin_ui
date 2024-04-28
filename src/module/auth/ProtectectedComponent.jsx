@@ -1,8 +1,12 @@
 import { Navigate , Outlet } from "react-router-dom";
 
 export default function PrivateRoute ({authed , role , requiredRole  , children}){
-    if (!authed && role  !== requiredRole)  {
-        return <Navigate to= {"/login"}/>
+    if (!authed)  {
+        if(requiredRole !== role){
+            console.log("required role from private route : " , requiredRole , "and user role is : " , role )
+            return <Navigate to= {"/login"}/>
+        }
+        
         
     }
     return children ? children :<Outlet/>

@@ -16,7 +16,6 @@ export default function Schools() {
             try {
                 const response = await instance.get("/api/v1/school/admin/schools");
                 setSchools(response.data);
-                console.log(schools[0])
             } catch (error) {
                 // setError("Failed to fetch schools.");
                 console.log("error")

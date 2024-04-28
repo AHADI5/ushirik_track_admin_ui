@@ -1,9 +1,10 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
 import { useAuth } from "../../module/auth/useAuth";
 import { jwtDecode } from "jwt-decode";
+import { getSchoolID } from "../school/service";
+
 
 export default function LoginForm() {
   const { login } = useAuth();
@@ -31,14 +32,19 @@ export default function LoginForm() {
     try {
       // Call the login function from useAuth
       await login(formData);
-      const token = localStorage.getItem("token");
+      // Retrieve the token from sessionStorage instead of localStorage
+      const token = sessionStorage.getItem("token");
       const decodedToken = jwtDecode(token);
       console.log(decodedToken)
 
+      // Navigate based on the user role from the decoded token
       if (decodedToken["authorities"] === "ADMIN") {
         navigate("/schools");
       } else if (decodedToken["authorities"] === "DIRECTOR") {
-        navigate("/schoolDirection");
+        //Get schoolID by director email 
+        const schoolID = await getSchoolID()
+
+        navigate(`/schoolDirection/${schoolID}`);
       }
     } catch (error) {
       setError("Email ou mot de passe incorrect.");
@@ -68,7 +74,7 @@ export default function LoginForm() {
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
-        <div className="passoword">
+        <div className="password">
           <div>
             <label htmlFor="password">Mot de passe</label>
           </div>
@@ -84,9 +90,7 @@ export default function LoginForm() {
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
-        <button className="create-account-button" disabled={loading}
-       
-        >
+        <button className="create-account-button" disabled={loading}>
           {loading ? (
             <div className="flex justify-center">
               <TailSpin

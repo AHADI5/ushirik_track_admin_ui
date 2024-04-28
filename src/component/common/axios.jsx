@@ -7,7 +7,7 @@ const instance = axios.create({
 // Add Axios interceptor to include token in every request
 instance.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

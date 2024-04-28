@@ -1,9 +1,13 @@
-import AppHeader from "../../component/common/AppHeader";
+
+import { useParams } from "react-router-dom";
 import DirectorContent from "./directorContent";
-import AppMenu from "../../component/common/AppMenu";
+
  
 
 export default function DirectorDashBoard() {
+
+    //use params here 
+    const params  = useParams();
     
     return (
         <div>

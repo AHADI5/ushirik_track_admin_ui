@@ -431,3 +431,7 @@ header h2  {
 .user-actions {
     width: fit-content;
 }
+
+.chart  {
+    width: 280px;
+}

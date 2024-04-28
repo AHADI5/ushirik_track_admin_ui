@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Avatar from 'react-avatar';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../module/auth/useAuth';
 
 function ProfileDropdown() {
     const [isShown, setIsShown] = useState(false);
     const dropdownRef = useRef(null);
+    const { logout} = useAuth();
 
     //Decoding the token 
 
@@ -25,7 +27,7 @@ function ProfileDropdown() {
     function toggleInformation() {
         setIsShown(prevState => !prevState);
     }
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     var decodedToken = "" 
 
     if (token) {
@@ -40,7 +42,10 @@ function ProfileDropdown() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-      localStorage.removeItem("token");
+        
+      
+      logout()
+      
       navigate("/login");
     };
 

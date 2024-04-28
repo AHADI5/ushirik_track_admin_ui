@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import AppMenu from "./AppMenu";
 import { faHomeAlt,
     faUserAlt ,
@@ -19,7 +20,10 @@ export default function DirectorSideBar(params) {
     ];
     return (
         <>
+            
              <AppMenu menus={menuComponents}/>
+             <Outlet/>
+             
         </>
     )
 }
