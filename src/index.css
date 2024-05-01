@@ -433,5 +433,10 @@ header h2  {
 }
 
 .chart  {
-    width: 280px;
+    width: 225px;
+}
+
+.dir-dash .title {
+    font-weight: 600;
+    color: black;
 }

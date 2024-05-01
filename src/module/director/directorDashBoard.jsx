@@ -11,7 +11,7 @@ export default function DirectorDashBoard() {
     
     return (
         <div>
-            <DirectorContent /> 
+            <DirectorContent schoolID ={params['schoolID']}/> 
         </div>
     );
 }

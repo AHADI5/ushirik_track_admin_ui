@@ -21,6 +21,8 @@ import EditUser from './component/users/EditUser';
 
 import PrivateRoute from './module/auth/ProtectectedComponent';
 import {useAuth} from './module/auth/useAuth';
+import NewCommuniqueForm from './component/school/Communiques/newCommunique';
+import CommuniqueDetails from './component/school/Communiques/communiqueContent';
 
 export default function App () {
   const {authed, userRole} = useAuth ();
@@ -156,6 +158,25 @@ export default function App () {
                 <DirectorDashBoard />
               </PrivateRoute>
             }
+          />
+
+          <Route
+            path='/schoolDirection/:schoolID/new-communique'
+            element = {
+              <PrivateRoute role={userRole} authed={authed} requiredRole={'DIRECTOR'}>
+                <NewCommuniqueForm/>
+              </PrivateRoute>
+            }
+          
+          />
+          <Route
+            path='/schoolDirection/:schoolID/communique/:communiqueid'
+            element = {
+              <PrivateRoute role={userRole} authed={authed} requiredRole={'DIRECTOR'}>
+                <CommuniqueDetails/>
+              </PrivateRoute>
+            }
+          
           />
 
         </Route>

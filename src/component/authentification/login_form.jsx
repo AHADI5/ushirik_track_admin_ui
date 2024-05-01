@@ -1,56 +1,60 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { TailSpin } from "react-loader-spinner";
-import { useAuth } from "../../module/auth/useAuth";
-import { jwtDecode } from "jwt-decode";
-import { getSchoolID } from "../school/service";
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import {TailSpin} from 'react-loader-spinner';
+import {useAuth} from '../../module/auth/useAuth';
+import {jwtDecode} from 'jwt-decode'; // Corrected import statement
+import {getSchoolID} from '../school/service';
 
-
-export default function LoginForm() {
-  const { login } = useAuth();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+export default function LoginForm () {
+  const {login} = useAuth ();
+  const [formData, setFormData] = useState ({
+    email: '',
+    password: '',
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState (false);
+  const [error, setError] = useState ('');
+  const navigate = useNavigate ();
 
-  const gatherData = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
+  const gatherData = event => {
+    const {name, value} = event.target;
+    setFormData (prevFormData => ({
       ...prevFormData,
       [name]: value,
     }));
   };
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    setError("");
-    setLoading(true);
+  const handleLogin = async event => {
+    event.preventDefault ();
+    setError ('');
+    setLoading (true);
 
     try {
-      // Call the login function from useAuth
-      await login(formData);
-      // Retrieve the token from sessionStorage instead of localStorage
-      const token = sessionStorage.getItem("token");
-      const decodedToken = jwtDecode(token);
-      console.log(decodedToken)
+      await login (formData);
+      const token = sessionStorage.getItem ('token');
+      if (token) {
+        const decodedToken = jwtDecode (token);
+        console.log (decodedToken);
 
-      // Navigate based on the user role from the decoded token
-      if (decodedToken["authorities"] === "ADMIN") {
-        navigate("/schools");
-      } else if (decodedToken["authorities"] === "DIRECTOR") {
-        //Get schoolID by director email 
-        const schoolID = await getSchoolID()
-
-        navigate(`/schoolDirection/${schoolID}`);
+        switch (decodedToken.authorities) {
+          case 'ADMIN':
+            navigate ('/schools');
+            break;
+          case 'DIRECTOR':
+            const schoolID = await getSchoolID (); // Assuming getSchoolID needs an email
+            navigate (`/schoolDirection/${schoolID}`);
+            break;
+          default:
+            throw new Error ('Unauthorized role');
+        }
+      } else {
+        throw new Error ('No token found');
       }
-    } catch (error) {
-      setError("Email ou mot de passe incorrect.");
+    } catch (loginError) {
+      console.error (loginError);
+      setError ('Email ou mot de passe incorrect.'); // Keep the error message user-friendly
+    } finally {
+      setLoading (false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -91,22 +95,20 @@ export default function LoginForm() {
           />
         </div>
         <button className="create-account-button" disabled={loading}>
-          {loading ? (
-            <div className="flex justify-center">
-              <TailSpin
-                visible={true}
-                height="30"
-                width="30"
-                color="rgb(255,255 ,255)"
-                ariaLabel="tail-spin-loading"
-                radius="0.5"
-                wrapperStyle={{}}
-                wrapperClass=""
-              />
-            </div>
-          ) : (
-            "Connexion"
-          )}
+          {loading
+            ? <div className="flex justify-center">
+                <TailSpin
+                  visible={true}
+                  height="30"
+                  width="30"
+                  color="rgb(255,255 ,255)"
+                  ariaLabel="tail-spin-loading"
+                  radius="0.5"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                />
+              </div>
+            : 'Connexion'}
         </button>
       </form>
     </div>

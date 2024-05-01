@@ -1,6 +1,7 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, plugins } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-export default function ChildrenGenderChart(params) {
+export default function ChildrenGenderChart(schoolID) {
+    //TODO make a request with schoolID  "sCHOOL"
     ChartJS.register(ArcElement, Tooltip, Legend);
     const data = {
         labels: [

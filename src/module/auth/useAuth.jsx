@@ -1,32 +1,26 @@
-// useAuth.js
 import { createContext, useContext, useState, useEffect } from 'react';
-import  {jwtDecode}  from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import instance from '../../component/common/axios';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  // Initialize the authed state with the value from session storage
- // Add userRole state
   const [authed, setAuthed] = useState(() => {
     const token = sessionStorage.getItem('token');
-    return token ? true : false; // If there's a token, authed is true, otherwise false
+    // Ensure that the token is a string and not just any truthy value
+    return typeof token === 'string' && token.trim() !== '';
   });
   const [userRole, setUserRole] = useState(() => {
     const token = sessionStorage.getItem('token');
-    const decodedToken = jwtDecode(token);
-    return decodedToken["authorities"];
-
-  }); 
-  
+    // Decode the token only if it's a non-empty string
+    return token ? jwtDecode(token).authorities : null;
+  });
 
   useEffect(() => {
-    // Check if the user is authenticated
     const token = sessionStorage.getItem('token');
-    if (token) {
-      // Decode the token to extract user role
+    if (typeof token === 'string' && token.trim() !== '') {
       const decodedToken = jwtDecode(token);
-      setUserRole(decodedToken['authorities']);
+      setUserRole(decodedToken.authorities);
     } else {
       setUserRole(null);
     }
@@ -35,12 +29,17 @@ export const AuthProvider = ({ children }) => {
   const login = async (formData) => {
     try {
       const response = await instance.post('/api/v1/auth/authenticate', formData);
-      // If successful, set authed to true and extract user role
-      setAuthed(true);
-      sessionStorage.setItem('token', response.data.token);
-  
-    
-     
+      if (response.data.token && typeof response.data.token === 'string') {
+        setAuthed(true);
+        sessionStorage.setItem('token', response.data.token);
+        // Decode the token to extract user role
+        const decodedToken = jwtDecode(response.data.token);
+        setUserRole(decodedToken.authorities);
+      } else {
+        // Handle the case where the token is not a string or is missing
+        console.error('Token must be a string value');
+        throw new Error('Login failed: Token must be a string value');
+      }
     } catch (error) {
       console.error('Error logging in:', error);
       throw new Error('Login failed');
@@ -49,7 +48,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     try {
-      // Clear the authentication token and set authed to false
       sessionStorage.removeItem('token');
       setAuthed(false);
       setUserRole(null);
