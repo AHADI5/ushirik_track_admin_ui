@@ -23,6 +23,8 @@ import PrivateRoute from './module/auth/ProtectectedComponent';
 import {useAuth} from './module/auth/useAuth';
 import NewCommuniqueForm from './component/school/Communiques/newCommunique';
 import CommuniqueDetails from './component/school/Communiques/communiqueContent';
+import CommuniqueList from './component/school/Communiques/communiqueList';
+import StudentList from './component/student/studentList';
 
 export default function App () {
   const {authed, userRole} = useAuth ();
@@ -170,10 +172,29 @@ export default function App () {
           
           />
           <Route
-            path='/schoolDirection/:schoolID/communique/:communiqueid'
+            path='/schoolDirection/:schoolID/communique/:communiqueID'
             element = {
               <PrivateRoute role={userRole} authed={authed} requiredRole={'DIRECTOR'}>
                 <CommuniqueDetails/>
+              </PrivateRoute>
+            }
+          
+          />
+          <Route
+            path='/schoolDirection/:schoolID/communique-all'
+            element = {
+              <PrivateRoute role={userRole} authed={authed} requiredRole={'DIRECTOR'}>
+                <CommuniqueList/>
+              </PrivateRoute>
+            }
+          
+          />
+
+          <Route
+            path='/schoolDirection/:schoolID/students'
+            element = {
+              <PrivateRoute role={userRole} authed={authed} requiredRole={'DIRECTOR'}>
+                <StudentList/>
               </PrivateRoute>
             }
           

@@ -4,6 +4,7 @@ import ChildrenGenderChart from '../../component/student/studentChart';
 import RecentCommunique from '../../component/school/Communiques/recentCommuniques';
 import { StyledButton } from '../../component/common/buttons/buttons';
 import { Link, useParams } from 'react-router-dom';
+import EventCalendar from '../../component/school/events/calendar';
 
 
 export default function DirectorContent (schoolID) {
@@ -60,6 +61,7 @@ export default function DirectorContent (schoolID) {
   <div class="flex-[2] bg-white p-4 mt-1 shadow">
     <div className="title">Evenénement scolaire</div>
     {/* School events content goes here */}
+    <EventCalendar/>
   </div>
 </div>
 

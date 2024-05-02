@@ -11,7 +11,7 @@ function DataTable({ columns, fetchDataUrl }) {
   const [dataUser, setDataUser] = useState([]);
   const params = useParams();
   const schoolID = params['schoolID'];
-  const navigate = useNavigate(); // Use useHistory hook to access history object
+  const navigate = useNavigate(); // Use useNavigate hook to access history object
 
   useEffect(() => {
     const fetchUsers = async () => {

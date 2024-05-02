@@ -1,12 +1,13 @@
+
 // services/CommuniqueService.js
 import instance from "../../common/axios";
 
-const BASE_URL = 'api/v1/school';
+const BASE_URL = 'api/v1/student';
 
 const CommuniqueService = {
-  getAllCommuniques: async (schoolID) => {
+  registerStudent: async (schoolID) => {
     try {
-      const response = await instance.get(`/${BASE_URL}/${schoolID}/communications`);
+      const response = await instance.get(`/${BASE_URL}/communications`);
       return response.data;
     } catch (error) {
       console.error('Error fetching all communiques:', error);

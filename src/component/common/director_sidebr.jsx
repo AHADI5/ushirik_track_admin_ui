@@ -9,12 +9,14 @@ import { faHomeAlt,
     faCalendarWeek
     
   } from "@fortawesome/free-solid-svg-icons";   
-export default function DirectorSideBar(params) {
+  import { useParams } from "react-router-dom";
+export default function DirectorSideBar() {
+    const params  = useParams() 
     const menuComponents = [
-        { menu: "Accueil", link: "/directorDashBoard", icon: faHomeAlt },
+        { menu: "Accueil", link: `/schoolDirection/${params['schoolID']}`, icon: faHomeAlt },
         { menu: "Classes", link: "/users", icon: faUserAlt },
-        { menu: "Communiqués", link: "/schools", icon: faNewspaper },
-        { menu: "Elèves", link: "/schools", icon: faUserGroup }, 
+        { menu: "Communiqués", link: `/schoolDirection/${params['schoolID']}/communique-all`, icon: faNewspaper },
+        { menu: "Elèves", link: `/schoolDirection/${params['schoolID']}/students`, icon: faUserGroup }, 
         { menu: "Evénéments", link: "/schools", icon: faCalendarWeek },
         { menu: "Cours", link: "/schools", icon: faChalkboardTeacher }, 
     ];
