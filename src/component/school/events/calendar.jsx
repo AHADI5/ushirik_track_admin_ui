@@ -15,7 +15,7 @@ const EventCalendar = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-gray-100 rounded-md">
+    <div className="max-w-md mx-auto items-center   rounded-md h-50">
       <Calendar
       
         onChange={handleDateChange}

@@ -53,7 +53,7 @@ export default function DirectorContent (schoolID) {
   <div class="flex-[1] bg-white p-4 shadow">
     <div className='flex justify-between'>
       <div className='flex justify-center'> <p className='title'>Communiqués Récents </p></div>
-       {isCommuniqueEmpty ? <Link to={`/schoolDirection/${param['schoolID']}/new-communique`}><StyledButton text={"nouveau"}/></Link> : '' }
+       {isCommuniqueEmpty ? <Link to={`/schoolDirection/${param['schoolID']}/new-communique`}><p className="text-blue-500 text-sm">Nouveau</p></Link> : '' }
     </div>
     <RecentCommunique iscommuniqueEmpty={isCommuniqueEmpty}/>
   </div>
