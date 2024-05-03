@@ -25,6 +25,8 @@ import NewCommuniqueForm from './component/school/Communiques/newCommunique';
 import CommuniqueDetails from './component/school/Communiques/communiqueContent';
 import CommuniqueList from './component/school/Communiques/communiqueList';
 import StudentList from './component/student/studentList';
+import EventManagement from './component/school/events/eventManagementPage';
+
 
 export default function App () {
   const {authed, userRole} = useAuth ();
@@ -197,7 +199,15 @@ export default function App () {
                 <StudentList/>
               </PrivateRoute>
             }
-          
+          />
+
+          <Route
+            path='/schoolDirection/:schoolID/events'
+            element = {
+              <PrivateRoute role={userRole} authed={authed} requiredRole={'DIRECTOR'}>
+                  <EventManagement/>
+              </PrivateRoute>
+            }
           />
 
         </Route>
